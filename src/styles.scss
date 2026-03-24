@@ -1,0 +1,71 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+:host {
+  --gym-gold: #F59E0B;
+  --gym-dark: #1F2937;
+  --gym-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gym-accent: #EF4444;
+  --shadow-gym: 0 10px 30px rgba(0,0,0,0.3);
+  --bright-blue: oklch(51.01% 0.274 263.83);
+  --gray-700: oklch(36.98% 0.014 302.71);
+}
+
+* { font-family: 'Inter', 'Roboto', sans-serif; }
+html, body { height: 100%; margin: 0; box-sizing: border-box; }
+
+@keyframes gymPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes gymLift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.gym-hero {
+  background: var(--gym-bg), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.gym-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+}
+
+.gym-card {
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-gym);
+}
+
+.gym-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  animation: gymPulse 0.6s ease-in-out;
+}
+
+.stats-card {
+  animation: gymPulse 2s infinite;
+}
+
+.workout-icon {
+  font-size: 3rem;
+  animation: gymLift 2s infinite;
+}
