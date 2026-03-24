@@ -1,19 +1,12 @@
-# Image Fix Progress
+# Fix Compilation Errors - Approved Plan
 
-✅ **Step 1**: Analyzed project files and identified missing workout SVG images in dashboard component causing broken images (404 errors).
+## Steps:
+- [ ] Step 1: Rewrite src/app/models/user.model.ts with clean User interface (id, email, name?, age?, gender?, bmi?).
+- [ ] Step 2: Rewrite src/app/auth/auth.service.ts - fix literal \\n, duplicate 'n;', proper login/signup logic.
+- [ ] Step 3: Fix src/app/app.routes.ts line 17+ syntax (remove invalid chars).
+- [ ] Step 4: Kill running ng serve terminals (Ctrl+C).
+- [ ] Step 5: Run `ng serve` to verify clean build.
+- [ ] Step 6: Update TODO.md progress, complete task.
 
-✅ **Step 2**: Created missing SVG files:
-   - `public/assets/images/workout-cardio.svg`
-   - `public/assets/images/workout-strength.svg` 
-   - `public/assets/images/workout-yoga.svg`
-
-**Next Steps (for user)**:
-- Restart Angular dev server: `ng serve`
-- Navigate to Dashboard - workout cards should now show icons
-- Check Profile/BMI pages - avatar/BMI images work
-- Browser console: No more 404s for workout SVGs
-- Navbar logo already worked
-
-Task complete! All local images now present and paths correct.
-
+**Current status:** Plan approved. Implementing fixes.
 

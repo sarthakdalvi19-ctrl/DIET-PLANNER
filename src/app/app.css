@@ -2,18 +2,28 @@ app-navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: var(--shadow-gym);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 main {
   min-height: calc(100vh - 64px);
   padding: 2rem;
-  background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1920') center/cover fixed;
+  position: relative;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  box-shadow: var(--shadow-gym);
 }
 
 .animate-slide-in {
@@ -22,26 +32,38 @@ main {
 
 .gym-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
 }
 
 .workouts-preview {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
 }
 
 .cta-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
+  gap: 1.5rem;
+  margin: 4rem 0;
+  justify-items: center;
 }
 
 @media (max-width: 768px) {
   main { padding: 1rem; }
   .gym-stats, .workouts-preview { grid-template-columns: 1fr; }
+  .cta-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+.profile-avatar {
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+}
+
+.hero-image, .hero {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+

@@ -15,15 +15,7 @@ import { AuthService } from '../auth/auth.service';
       </mat-card-header>
 
       <mat-card-content>
-        <div *ngIf="user()" class="profile-info">
-          <img src="/assets/images/avatar.svg" class="profile-avatar" alt="Profile Avatar">
-          <div>
-            <p><strong>Name:</strong> {{ user()?.name }}</p>
-            <p><strong>Email:</strong> {{ user()?.email }}</p>
-            <p><strong>Age:</strong> {{ user()?.age }}</p>
-            <p><strong>BMI:</strong> {{ user()?.bmi || 'Not calculated' }}</p>
-          </div>
-        </div>
+        <div *ngIf="user()" class="profile-info">\n          <img src="/assets/images/avatar.svg" class="profile-avatar" alt="Profile Avatar">\n          <div>\n            <p><strong>Name:</strong> {{ user()?.name }}</p>\n            <p><strong>Gender:</strong> {{ user()?.gender || 'Not set' }}</p>\n            <p><strong>Age:</strong> {{ user()?.age }}</p>\n            <p><strong>Email:</strong> {{ user()?.email }}</p>\n            <p><strong>BMI:</strong> {{ user()?.bmi || 'Not calculated' }}</p>\n          </div>\n        </div>
         <div *ngIf="!user()">
           <p>Please login to view profile.</p>
         </div>

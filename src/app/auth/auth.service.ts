@@ -22,22 +22,44 @@ export class AuthService {
   login(email: string, password: string) {
     // Accept any non-empty credentials
     if (email && email.includes('@') && password && password.length >= 6) {
-      const u: User = {id: Date.now().toString(), email, name: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1), age: 30};
-      localStorage.setItem('user', JSON.stringify(u));
-      this._user.set(u);
-      this.snackBar.open(`Welcome ${u.name}! Login Successful`, 'OK', { duration: 3000 });
-      this.router.navigate(['/dashboard']);
+      const tempUser: User = {
+        id: Date.now().toString(),
+        email
+      };
+      localStorage.setItem('user', JSON.stringify(tempUser));
+      this._user.set(tempUser);
+      this.snackBar.open(`Welcome back! Login Successful`, 'OK', { duration: 3000 });
+      
+      // Check profile completion
+      const savedUser = JSON.parse(localStorage.getItem('user') || 'null') as User | null;
+      if (savedUser && (!savedUser.name || !savedUser.gender || !savedUser.age)) {
+        this.router.navigate(['/profile-form']);
+      } else {
+        this.router.navigate(['/dashboard']);
+      }
     } else {
       this.snackBar.open('Enter valid email/password (6+ chars)', 'OK');
     }
   }
 
   signup(email: string, password: string, name: string, age: number) {
-    const u: User = {id: Date.now().toString(), email, name, age};
+    const u: User = {
+      id: Date.now().toString(),
+      email,
+      name,
+      age
+    };
     localStorage.setItem('user', JSON.stringify(u));
     this._user.set(u);
     this.snackBar.open('Signup Successful!', 'OK', { duration: 3000 });
-    this.router.navigate(['/dashboard']);
+    
+    // Check profile completion
+    const savedUser = JSON.parse(localStorage.getItem('user') || 'null') as User | null;
+    if (savedUser && (!savedUser.name || !savedUser.gender || !savedUser.age)) {
+      this.router.navigate(['/profile-form']);
+    } else {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   logout() {
@@ -48,6 +70,10 @@ export class AuthService {
 
   init() {
     const str = localStorage.getItem('user');
-    if (str) this._user.set(JSON.parse(str));
+    if (str) {
+      const userData = JSON.parse(str) as User;
+      this._user.set(userData);
+    }
   }
 }
+

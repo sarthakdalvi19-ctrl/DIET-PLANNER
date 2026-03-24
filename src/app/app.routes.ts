@@ -15,9 +15,11 @@ export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   { path: 'bmi', component: BmiComponent, canActivate: [authGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  { path: 'profile-form', loadComponent: () => import('./profile-form/profile-form.component').then(m => m.ProfileFormComponent), canActivate: [authGuard] },
   { path: 'diet-plans', component: DietPlansComponent, canActivate: [authGuard] },
   { path: 'diet-plans/:id', component: DietPlanDetailComponent, canActivate: [authGuard] },
   { path: 'cart', loadComponent: () => import('./cart/cart.component').then(m => m.CartComponent), canActivate: [authGuard] },
   { path: 'checkout', loadComponent: () => import('./cart/checkout.component').then(m => m.CheckoutComponent), canActivate: [authGuard] },
   { path: '**', redirectTo: '/login' }
 ];
+

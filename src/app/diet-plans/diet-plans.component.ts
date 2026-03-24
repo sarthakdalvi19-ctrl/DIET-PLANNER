@@ -22,7 +22,7 @@ import { AgeGroup } from '../models/age-group.enum';
     <div class="diet-plans">
       <div class="header">
         <h1>Diet Plans</h1>
-        <p>Filter by age group and search</p>
+        <p>Filter by age group, search and sort</p>
       </div>
       <div class="filters">
         <mat-form-field appearance="outline">
@@ -36,11 +36,19 @@ import { AgeGroup } from '../models/age-group.enum';
           <mat-label>Search</mat-label>
           <input matInput [formControl]="searchControl" placeholder="Search plans...">
         </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Sort By</mat-label>
+          <mat-select [formControl]="sortControl">
+            <mat-option value="none">None</mat-option>
+            <mat-option value="price-asc">Price: Low to High</mat-option>
+            <mat-option value="price-desc">Price: High to Low</mat-option>
+            <mat-option value="popularity">Popularity</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <mat-grid-list cols="3" rowHeight="1:1" gutterSize="1rem" class="grid">
         <mat-grid-tile *ngFor="let plan of dietService.filteredPlans()">
           <mat-card class="plan-card">
-<img mat-card-image [src]="plan.image" [alt]="plan.title" loading="lazy" onerror="this.src='/assets/images/fallback-food.svg'">
             <mat-card-header>
               <mat-card-title>{{ plan.title }}</mat-card-title>
               <mat-card-subtitle>{{ plan.ageGroup }} | {{ plan.dailyCalories }} cal</mat-card-subtitle>
@@ -110,9 +118,11 @@ export class DietPlansComponent {
 
   ageControl = new FormControl('All');
   searchControl = new FormControl('');
+  sortControl = new FormControl('none');
 
   constructor() {
-this.searchControl.valueChanges.subscribe(search => this.dietService.search.set(search || ''));
+    this.searchControl.valueChanges.subscribe(search => this.dietService.search.set(search || ''));
     this.ageControl.valueChanges.subscribe(age => this.dietService.selectedAge.set(age as AgeGroup | 'All'));
+    this.sortControl.valueChanges.subscribe(order => this.dietService.sortOrder.set((order ?? 'none') as any));
   }
 }
